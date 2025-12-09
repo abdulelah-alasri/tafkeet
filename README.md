@@ -221,6 +221,14 @@ The package provides useful extensions to convert numbers directly to words in a
 // With currency
 '1000'.tafkeet(lang: Lang.en, currency: Currency.EUR);
 // Output: One Thousand Euros only
+
+// Supports Arabic-Indic numerals (automatically converted)
+'٥٠٠'.tafkeet(lang: Lang.ar, currency: Currency.SAR);
+// Output: خمسمائة ريال سعودي فقط لا غير
+
+// Replace Arabic numerals with English numerals
+'١٢٣.٤٥'.replaceArabicNumbers();
+// Output: 123.45
 ```
 
 ### Comprehensive Extension Example
@@ -248,7 +256,94 @@ void main() {
 - ✅ **Shorter and clearer code**: Instead of `Tafkeet.convert(120)` you can write `120.tafkeet()`
 - ✅ **Better readability**: Code becomes more natural and easy to read
 - ✅ **String support**: Convert numeric text directly, with protection from non-numeric text
+- ✅ **Arabic numerals support**: Automatically handles Arabic-Indic digits (٠١٢٣٤٥٦٧٨٩)
+- ✅ **Number formatting**: Format numbers with thousand separators using `amountFormat()`
 - ✅ **Full flexibility**: Same parameters available in `Tafkeet.convert()`
+
+## Number Formatting
+
+The package provides utilities to format numbers with thousand separators:
+
+### Format Numbers with Separators
+
+```dart
+// Using static method
+NumberUtils.amountFormat(1234567); // Returns: '1,234,567'
+NumberUtils.amountFormat(1234567.89, digit: 2); // Returns: '1,234,567.89'
+
+// Using extension on double
+1234567.89.amountFormat(digit: 2); // Returns: '1,234,567.89'
+
+// Using extension on int
+1234567.amountFormat(); // Returns: '1,234,567'
+
+// Using extension on String
+'1234567.89'.amountFormat(digit: 2); // Returns: '1,234,567.89'
+
+// Works with Arabic numerals
+'١٢٣٤٥٦٧'.amountFormat(); // Returns: '1,234,567'
+
+// Large numbers
+1234567890.12.amountFormat(digit: 2); // Returns: '1,234,567,890.12'
+```
+
+### Combine with tafkeet()
+
+```dart
+final amount = 1234567.89;
+
+// Format the number
+print(amount.amountFormat(digit: 2)); 
+// Output: 1,234,567.89
+
+// Convert to words
+print(amount.tafkeet(lang: Lang.ar, currency: Currency.SAR));
+// Output: واحد مليون و مئتان و أربعة و ثلاثون ألف و خمسمائة و سبعة و ستون ريالاً سعودياً و تسعة و ثمانون هللة فقط لا غير
+```
+
+## Arabic-Indic Numerals Support
+
+The package provides full support for Arabic-Indic numerals (٠١٢٣٤٥٦٧٨٩) used in Arabic texts:
+
+### Automatic Conversion in tafkeet()
+
+The `tafkeet()` extension automatically converts Arabic-Indic numerals:
+
+```dart
+// Works with English numerals
+'123'.tafkeet(lang: Lang.ar);
+// Output: مائة و ثلاثة و عشرون فقط لا غير
+
+// Works with Arabic-Indic numerals (automatically converted)
+'١٢٣'.tafkeet(lang: Lang.ar);
+// Output: مائة و ثلاثة و عشرون فقط لا غير
+
+// Works with decimals
+'١٢٣.٤٥'.tafkeet(lang: Lang.ar, currency: Currency.SAR);
+// Output: مائة و ثلاثة و عشرون ريالاً سعودياً و خمسة و أربعون هللة فقط لا غير
+```
+
+### Manual Replacement
+
+You can also manually replace Arabic-Indic numerals using:
+
+```dart
+// Using static method
+NumberUtils.replaceArabicNumber('١٢٣.٤٥');
+// Returns: '123.45'
+
+// Using extension
+'١٢٣.٤٥'.replaceArabicNumbers();
+// Returns: '123.45'
+
+// In mixed text
+'السعر: ٩٩٩ ريال'.replaceArabicNumbers();
+// Returns: 'السعر: 999 ريال'
+
+// All digits
+'٠١٢٣٤٥٦٧٨٩'.replaceArabicNumbers();
+// Returns: '0123456789'
+```
 
 ## Supported Currencies
 

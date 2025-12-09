@@ -5,6 +5,65 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0] - 2025-12-09
+
+### ✨ New Features
+
+#### Arabic-Indic Numerals Support
+- **Automatic Conversion**: String extension now automatically converts Arabic-Indic digits (٠١٢٣٤٥٦٧٨٩) to Western digits
+- **`replaceArabicNumber()`**: New static method in `NumberUtils` to convert Arabic numerals to English
+- **`replaceArabicNumbers()`**: New extension on `String` for easy numeral conversion
+- Works seamlessly with `tafkeet()` - Arabic numerals are automatically handled
+
+```dart
+'١٢٣'.tafkeet(lang: Lang.ar); // Automatically converts and processes
+'٥٠٠'.replaceArabicNumbers(); // Returns: '500'
+NumberUtils.replaceArabicNumber('السعر: ٩٩٩'); // Returns: 'السعر: 999'
+```
+
+#### Number Formatting
+- **`amountFormat()`**: New method to format numbers with thousand separators (commas)
+- **Extensions on all numeric types**: Available on `double`, `int`, and `String`
+- **Decimal Precision Control**: Use `digit` parameter to control decimal places
+- **Arabic Numerals Support**: Works with both Western and Arabic-Indic digits
+- **Smart Validation**: Returns original string if input is not a valid number
+
+```dart
+// Format with thousand separators
+1234567.amountFormat(); // Returns: '1,234,567'
+1234567.89.amountFormat(digit: 2); // Returns: '1,234,567.89'
+
+// Works with strings and Arabic numerals
+'١٢٣٤٥٦٧'.amountFormat(); // Returns: '1,234,567'
+'1234567.89'.amountFormat(digit: 2); // Returns: '1,234,567.89'
+
+// Combine with tafkeet
+final amount = 1234567.89;
+print(amount.amountFormat(digit: 2)); // 1,234,567.89
+print(amount.tafkeet(lang: Lang.ar, currency: Currency.SAR));
+```
+
+### 📚 Documentation
+
+- Added comprehensive documentation for Arabic-Indic numerals support in README
+- Added "Number Formatting" section with examples
+- Updated all examples to showcase new features
+- Added 7 new examples in `example/main.dart` (Examples 24-30)
+
+### 🧪 Testing
+
+- Added 11 new unit tests for `amountFormat()` functionality
+- Added 8 new unit tests for Arabic numerals conversion
+- Total test count: **32 tests** (all passing ✅)
+
+### 📦 Package Updates
+
+- Updated package description
+- Package size: 21 KB (compressed)
+- All code comments and documentation in English
+
+---
+
 ## [1.0.0] - 2025-12-09
 
 ### 🎉 Initial Release
@@ -33,6 +92,15 @@ First stable release of Tafkeet - A comprehensive Flutter package for converting
   - `double` extension: `120.5.tafkeet(lang: Lang.ar)`
   - `int` extension: `250.tafkeet(lang: Lang.en)`
   - `String` extension: `'75.25'.tafkeet()` with automatic number validation
+  - **Arabic-Indic Numerals Support**: Automatically converts Arabic numerals (٠١٢٣٤٥٦٧٨٩) in String extension
+- **Arabic Numerals Replacement**: 
+  - `NumberUtils.replaceArabicNumber()` - Convert Arabic-Indic digits to Western digits
+  - `String.replaceArabicNumbers()` extension - Convert numerals directly on strings
+- **Number Formatting**:
+  - `NumberUtils.amountFormat()` - Format numbers with thousand separators (commas)
+  - `.amountFormat()` extension on `double`, `int`, and `String` - Format numbers directly
+  - Supports decimal precision control with `digit` parameter
+  - Works with Arabic-Indic numerals
 - **Configuration**: `Tafkeet.configure()` for setting default language and currency
 - **Custom Prefix/Suffix**: Add custom text before and after converted numbers
 
@@ -96,6 +164,15 @@ Tafkeet.convert(250.50, lang: Lang.ar, currency: Currency.SAR);
 // Using extensions
 120.tafkeet(lang: Lang.ar);
 '75.25'.tafkeet(currency: Currency.USD);
+
+// Arabic-Indic numerals support
+'١٢٣'.tafkeet(lang: Lang.ar); // Automatically converts ١٢٣ to 123
+'٥٠٠'.replaceArabicNumbers(); // Returns: '500'
+
+// Number formatting with thousand separators
+1234567.amountFormat(); // Returns: '1,234,567'
+1234567.89.amountFormat(digit: 2); // Returns: '1,234,567.89'
+'١٢٣٤٥٦٧'.amountFormat(); // Returns: '1,234,567'
 
 // Configure defaults
 Tafkeet.configure(defaultLang: Lang.ar, defaultCurrency: Currency.SAR);

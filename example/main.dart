@@ -183,5 +183,79 @@ void main() {
   print('   String (invalid): ${nonNum.tafkeet(lang: Lang.ar)}');
   print('');
 
+  // Example 19: Replace Arabic numerals
+  print('19. Replace Arabic numerals with English:');
+  print('   Input: ١٢٣');
+  print('   Output: ${'١٢٣'.replaceArabicNumbers()}');
+  print('');
+
+  // Example 20: Convert Arabic numerals directly
+  print('20. Convert string with Arabic numerals:');
+  print('   Input: ٥٠٠');
+  print('   Output: ${'٥٠٠'.tafkeet(lang: Lang.ar, currency: Currency.SAR)}');
+  print('');
+
+  // Example 21: Mixed Arabic text with numerals
+  print('21. Replace Arabic numerals in mixed text:');
+  final mixedText = 'السعر: ٩٩٩ ريال';
+  print('   Input: $mixedText');
+  print('   Output: ${mixedText.replaceArabicNumbers()}');
+  print('');
+
+  // Example 22: Convert decimal with Arabic numerals
+  print('22. Convert decimal with Arabic numerals:');
+  print('   Input: ١٢٣.٤٥');
+  print('   Output: ${'١٢٣.٤٥'.tafkeet(lang: Lang.ar, currency: Currency.EGP)}');
+  print('');
+
+  // Example 23: All Arabic digits conversion
+  print('23. Convert all Arabic digits:');
+  print('   Input: ٠١٢٣٤٥٦٧٨٩');
+  print('   Output: ${'٠١٢٣٤٥٦٧٨٩'.replaceArabicNumbers()}');
+  print('');
+
+  // Example 24: Format number with thousand separators
+  print('24. Format integer with thousand separators:');
+  print('   Input: 1234567');
+  print('   Output: ${1234567.amountFormat()}');
+  print('');
+
+  // Example 25: Format decimal with thousand separators
+  print('25. Format decimal with thousand separators:');
+  print('   Input: 1234567.89');
+  print('   Output: ${1234567.89.amountFormat(digit: 2)}');
+  print('');
+
+  // Example 26: Format string with thousand separators
+  print('26. Format string with thousand separators:');
+  print('   Input: "9999.5"');
+  print('   Output: ${'9999.5'.amountFormat(digit: 2)}');
+  print('');
+
+  // Example 27: Format large number
+  print('27. Format large number:');
+  print('   Input: 1234567890.12');
+  print('   Output: ${1234567890.12.amountFormat(digit: 2)}');
+  print('');
+
+  // Example 28: Format Arabic numerals with separators
+  print('28. Format Arabic numerals with thousand separators:');
+  print('   Input: ١٢٣٤٥٦٧');
+  print('   Output: ${'١٢٣٤٥٦٧'.amountFormat()}');
+  print('');
+
+  // Example 29: Format with zero decimals
+  print('29. Format number with zero decimals:');
+  print('   Input: 1000');
+  print('   Output: ${1000.amountFormat()}');
+  print('');
+
+  // Example 30: Combine tafkeet and amountFormat
+  print('30. Combine formatting and conversion:');
+  final amount = 1234567.89;
+  print('   Formatted: ${amount.amountFormat(digit: 2)}');
+  print('   In words: ${amount.tafkeet(lang: Lang.ar, currency: Currency.SAR)}');
+  print('');
+
   print('===== Examples Complete =====');
 }

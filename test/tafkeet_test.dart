@@ -107,5 +107,103 @@ void main() {
       final result = 'Not a number'.tafkeet(lang: Lang.en);
       expect(result, equals('Not a number'));
     });
+
+    test('Replace Arabic numerals with English numerals', () {
+      final result = NumberUtils.replaceArabicNumber('١٢٣');
+      expect(result, equals('123'));
+    });
+
+    test('Replace Arabic numerals in decimal number', () {
+      final result = NumberUtils.replaceArabicNumber('١٢٣.٤٥');
+      expect(result, equals('123.45'));
+    });
+
+    test('Replace Arabic numerals in mixed text', () {
+      final result = NumberUtils.replaceArabicNumber('السعر: ٩٩٩ ريال');
+      expect(result, equals('السعر: 999 ريال'));
+    });
+
+    test('String extension replaceArabicNumbers', () {
+      final result = '٥٠٠'.replaceArabicNumbers();
+      expect(result, equals('500'));
+    });
+
+    test('String extension tafkeet with Arabic numerals', () {
+      final result = '١٢٠'.tafkeet(lang: Lang.ar);
+      expect(result, contains('مائة'));
+      expect(result, contains('عشرون'));
+    });
+
+    test('String extension tafkeet with Arabic decimal numerals', () {
+      final result = '١٢٣.٤٥'.tafkeet(lang: Lang.ar, currency: Currency.SAR);
+      expect(result, contains('مائة'));
+      expect(result, contains('عشرون'));
+      expect(result, contains('ريال'));
+    });
+
+    test('NumberUtils replaceArabicNumber with all digits', () {
+      final result = NumberUtils.replaceArabicNumber('٠١٢٣٤٥٦٧٨٩');
+      expect(result, equals('0123456789'));
+    });
+
+    test('String extension replaceArabicNumbers with mixed content', () {
+      final result = 'الرقم: ٩٨٧.٦٥ريال'.replaceArabicNumbers();
+      expect(result, equals('الرقم: 987.65ريال'));
+    });
+
+    test('NumberUtils amountFormat with integer', () {
+      final result = NumberUtils.amountFormat(1234567);
+      expect(result, equals('1,234,567'));
+    });
+
+    test('NumberUtils amountFormat with decimal', () {
+      final result = NumberUtils.amountFormat(1234567.89, digit: 2);
+      expect(result, equals('1,234,567.89'));
+    });
+
+    test('NumberUtils amountFormat with string', () {
+      final result = NumberUtils.amountFormat('9999.5', digit: 2);
+      expect(result, equals('9,999.50'));
+    });
+
+    test('NumberUtils amountFormat with small number', () {
+      final result = NumberUtils.amountFormat(1000);
+      expect(result, equals('1,000'));
+    });
+
+    test('Double extension amountFormat', () {
+      final result = 1234567.89.amountFormat(digit: 2);
+      expect(result, equals('1,234,567.89'));
+    });
+
+    test('Int extension amountFormat', () {
+      final result = 1234567.amountFormat();
+      expect(result, equals('1,234,567'));
+    });
+
+    test('String extension amountFormat with valid number', () {
+      final result = '1234567.89'.amountFormat(digit: 2);
+      expect(result, equals('1,234,567.89'));
+    });
+
+    test('String extension amountFormat with Arabic numerals', () {
+      final result = '١٢٣٤٥٦٧'.amountFormat();
+      expect(result, equals('1,234,567'));
+    });
+
+    test('String extension amountFormat with invalid number', () {
+      final result = 'not a number'.amountFormat();
+      expect(result, equals('not a number'));
+    });
+
+    test('amountFormat with zero decimals', () {
+      final result = NumberUtils.amountFormat(1234567.0);
+      expect(result, equals('1,234,567'));
+    });
+
+    test('amountFormat with large number', () {
+      final result = NumberUtils.amountFormat(1234567890.12, digit: 2);
+      expect(result, equals('1,234,567,890.12'));
+    });
   });
 }
