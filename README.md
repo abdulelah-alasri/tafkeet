@@ -37,26 +37,26 @@ flutter pub get
 import 'package:tafkeet/tafkeet.dart';
 
 void main() {
-  // تحويل رقم إلى العربية
+  // Convert number to Arabic
   print(Tafkeet.convert(120, lang: Lang.ar));
-  // النتيجة: مائة و عشرون فقط لا غير
+  // Output: مائة و عشرون فقط لا غير
 
-  // تحويل رقم إلى الإنجليزية
+  // Convert number to English
   print(Tafkeet.convert(120, lang: Lang.en));
-  // النتيجة: One Hundred Twenty only
+  // Output: One Hundred Twenty only
 }
 ```
 
 ### Using Currencies
 
 ```dart
-// تحويل مبلغ بالريال السعودي
+// Convert amount in Saudi Riyal
 print(Tafkeet.convert(250.50, lang: Lang.ar, currency: Currency.SAR));
-// النتيجة: مئتان و خمسون ريالاً سعودياً و خمسون هللة فقط لا غير
+// Output: مئتان و خمسون ريالاً سعودياً و خمسون هللة فقط لا غير
 
-// تحويل مبلغ بالدولار الأمريكي
+// Convert amount in US Dollar
 print(Tafkeet.convert(100, lang: Lang.en, currency: Currency.USD));
-// النتيجة: One Hundred US Dollars only
+// Output: One Hundred US Dollars only
 ```
 
 **Note:** Decimal numbers are automatically rounded based on the currency's precision (defined by `partPrecision`). Most currencies use 2 decimal places, but some like Bitcoin can support up to 8 decimal places.
@@ -70,15 +70,15 @@ print(Tafkeet.convert(19002.989, lang: Lang.ar, currency: Currency.SAR));
 ### Configure Default Settings
 
 ```dart
-// تحديد اللغة والعملة الافتراضية
+// Set default language and currency
 Tafkeet.configure(
   defaultLang: Lang.ar,
   defaultCurrency: Currency.SAR,
 );
 
-// الآن يمكن استخدام convert بدون تحديد اللغة والعملة
+// Now you can use convert without specifying language and currency
 print(Tafkeet.convert(100));
-// النتيجة: مائة ريال سعودي فقط لا غير
+// Output: مائة ريال سعودي فقط لا غير
 ```
 
 ### Using Available Currencies
@@ -86,14 +86,14 @@ print(Tafkeet.convert(100));
 All currencies in the `Currency` enum can be used directly:
 
 ```dart
-// استخدام الجنيه المصري (موجود مسبقاً)
+// Use Egyptian Pound (already available)
 print(Tafkeet.convert(50, lang: Lang.ar, currency: Currency.EGP));
-// النتيجة: خمسون جنيهاً مصرياً فقط لا غير
+// Output: خمسون جنيهاً مصرياً فقط لا غير
 
-// استخدام الدينار الكويتي
+// Use Kuwaiti Dinar
 print(Tafkeet.convert(100, lang: Lang.ar, currency: Currency.KWD));
 
-// استخدام اليورو
+// Use Euro
 print(Tafkeet.convert(200, lang: Lang.ar, currency: Currency.EUR));
 ```
 
@@ -125,7 +125,7 @@ CurrencyConfig.updateCurrency(
   ),
 );
 
-// الآن استخدم العملة المخصصة
+// Now use the customized currency
 print(Tafkeet.convert(50, lang: Lang.ar, currency: Currency.EGP));
 ```
 
@@ -157,9 +157,9 @@ CurrencyConfig.addCurrency(
   ),
 );
 
-// استخدام العملة المخصصة بالرمز
+// Use custom currency by code
 print(Tafkeet.convert(3, lang: Lang.ar, currencyCode: 'BTC'));
-// النتيجة: ثلاثة بيتكوينات فقط لا غير
+// Output: ثلاثة بيتكوينات فقط لا غير
 ```
 
 ### Using Custom Prefix and Suffix
@@ -169,10 +169,10 @@ print(Tafkeet.convert(
   500,
   lang: Lang.ar,
   currency: Currency.SAR,
-  prefix: 'المبلغ:',
-  suffix: 'لا غير',
+  prefix: 'Amount:',
+  suffix: 'only',
 ));
-// النتيجة: المبلغ: خمسمائة ريال سعودي لا غير
+// Output: Amount: خمسمائة ريال سعودي only
 ```
 
 ## Using Extensions
@@ -182,60 +182,60 @@ The package provides useful extensions to convert numbers directly to words in a
 ### Extension on Double
 
 ```dart
-// استخدام extension على double
+// Use extension on double
 120.5.tafkeet(lang: Lang.ar);
-// النتيجة: مائة و عشرون و خمسون فقط لا غير
+// Output: مائة و عشرون و خمسون فقط لا غير
 
-// مع عملة
+// With currency
 250.75.tafkeet(lang: Lang.ar, currency: Currency.SAR);
-// النتيجة: مئتان و خمسون ريالاً سعودياً و خمسة و سبعون هللة فقط لا غير
+// Output: مئتان و خمسون ريالاً سعودياً و خمسة و سبعون هللة فقط لا غير
 ```
 
 ### Extension on Int
 
 ```dart
-// استخدام extension على int
+// Use extension on int
 100.tafkeet(lang: Lang.en);
-// النتيجة: One Hundred only
+// Output: One Hundred only
 
-// مع عملة
+// With currency
 500.tafkeet(lang: Lang.ar, currency: Currency.USD);
-// النتيجة: خمسمائة دولار أمريكي فقط لا غير
+// Output: خمسمائة دولار أمريكي فقط لا غير
 ```
 
 ### Extension on String
 
 ```dart
-// استخدام extension على string (إذا كان النص رقمياً)
+// Use extension on string (if text is numeric)
 '75.25'.tafkeet(lang: Lang.ar);
-// النتيجة: خمسة و سبعون و خمسة و عشرون فقط لا غير
+// Output: خمسة و سبعون و خمسة و عشرون فقط لا غير
 
-// إذا كان النص غير رقمي، يُرجع النص الأصلي
+// If text is not numeric, returns original text
 'Hello World'.tafkeet(lang: Lang.ar);
-// النتيجة: Hello World
+// Output: Hello World
 
-// مع عملة
+// With currency
 '1000'.tafkeet(lang: Lang.en, currency: Currency.EUR);
-// النتيجة: One Thousand Euros only
+// Output: One Thousand Euros only
 ```
 
 ### Comprehensive Extension Example
 
 ```dart
 void main() {
-  // تهيئة الإعدادات الافتراضية
+  // Configure default settings
   Tafkeet.configure(defaultLang: Lang.ar, defaultCurrency: Currency.SAR);
   
-  // استخدام مع أنواع مختلفة
+  // Use with different types
   final double amount1 = 123.45;
   final int amount2 = 200;
   final String amount3 = '350.75';
   final String text = 'not a number';
   
-  print(amount1.tafkeet());  // يستخدم الإعدادات الافتراضية
+  print(amount1.tafkeet());  // Uses default settings
   print(amount2.tafkeet(lang: Lang.en));
   print(amount3.tafkeet(currency: Currency.EGP));
-  print(text.tafkeet());  // يُرجع: not a number
+  print(text.tafkeet());  // Returns: not a number
 }
 ```
 
@@ -271,15 +271,15 @@ USD, EUR, GBP, JPY, CHF, CAD, AUD, NZD, CNY, INR, RUB, BRL, ZAR, SEK, NOK, DKK, 
 ### Getting Currency Lists
 
 ```dart
-// جميع العملات المدعومة
-print('عدد العملات: ${Currency.values.length}'); // 91+
+// All supported currencies
+print('Total currencies: ${Currency.values.length}'); // 91+
 
-// العملات العربية فقط
+// Arabic currencies only
 for (final currency in Currency.arabicCurrencies) {
   print('${currency.code}: ${currency.arabicName}');
 }
 
-// العملات الرئيسية
+// Major currencies
 for (final currency in Currency.majorCurrencies) {
   print('${currency.code}: ${currency.arabicName}');
 }
@@ -288,28 +288,28 @@ for (final currency in Currency.majorCurrencies) {
 ## CurrencyConfig Functions
 
 ```dart
-// إضافة عملة
+// Add currency
 CurrencyConfig.addCurrency(code, currencyInfo);
 
-// تحديث عملة موجودة
+// Update existing currency
 CurrencyConfig.updateCurrency(code, currencyInfo);
 
-// حذف عملة
+// Remove currency
 CurrencyConfig.removeCurrency(code);
 
-// الحصول على عملة
+// Get currency
 CurrencyInfo? currency = CurrencyConfig.getCurrency(code);
 
-// التحقق من وجود عملة
+// Check if currency exists
 bool exists = CurrencyConfig.hasCurrency(code);
 
-// الحصول على جميع العملات
+// Get all currencies
 Map<String, CurrencyInfo> currencies = CurrencyConfig.getAllCurrencies();
 
-// الحصول على رموز العملات المتاحة
+// Get available currency codes
 List<String> codes = CurrencyConfig.getAvailableCurrencyCodes();
 
-// إعادة تعيين إلى الإعدادات الافتراضية
+// Reset to default settings
 CurrencyConfig.reset();
 ```
 
@@ -319,15 +319,15 @@ CurrencyConfig.reset();
 
 ```dart
 print(Tafkeet.convert(1234567, lang: Lang.ar, currency: Currency.SAR));
-// النتيجة: واحد مليون و مئتان و أربعة و ثلاثون ألف و خمسمائة و سبعة و ستون ريالاً سعودياً فقط لا غير
+// Output: واحد مليون و مئتان و أربعة و ثلاثون ألف و خمسمائة و سبعة و ستون ريالاً سعودياً فقط لا غير
 ```
 
 ### Handle Feminine Currencies
 
 ```dart
-// الليرة السورية (عملة مؤنثة)
+// Syrian Pound (feminine currency)
 print(Tafkeet.convert(200, lang: Lang.ar, currency: Currency.SYP));
-// النتيجة: مئتا ليرة سورية فقط لا غير
+// Output: مئتا ليرة سورية فقط لا غير
 ```
 
 ### Decimal Rounding
@@ -363,15 +363,15 @@ The package currently supports two languages with the ability to extend to other
 ### Language Usage Example
 
 ```dart
-// استخدام العربية
+// Using Arabic
 print(Tafkeet.convert(1250, lang: Lang.ar, currency: Currency.SAR));
-// النتيجة: واحد ألف و مئتان و خمسون ريالاً سعودياً فقط لا غير
+// Output: واحد ألف و مئتان و خمسون ريالاً سعودياً فقط لا غير
 
-// استخدام الإنجليزية
+// Using English
 print(Tafkeet.convert(1250, lang: Lang.en, currency: Currency.SAR));
-// النتيجة: One Thousand Two Hundred Fifty Saudi Riyals only
+// Output: One Thousand Two Hundred Fifty Saudi Riyals only
 
-// بدون تحديد اللغة (يستخدم الافتراضي)
+// Without specifying language (uses default)
 Tafkeet.configure(defaultLang: Lang.ar, defaultCurrency: Currency.SAR);
 print(Tafkeet.convert(1250));
 ```
