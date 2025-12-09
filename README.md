@@ -20,7 +20,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  tafkeet: ^0.0.1
+  tafkeet: ^1.0.0
 ```
 
 Then run:
@@ -169,8 +169,8 @@ print(Tafkeet.convert(
   500,
   lang: Lang.ar,
   currency: Currency.SAR,
-  prefix: 'Amount:',
-  suffix: 'only',
+  prefix: 'المبلغ:',
+  suffix: 'فقط لاغير',
 ));
 // Output: Amount: خمسمائة ريال سعودي only
 ```
@@ -262,6 +262,7 @@ USD, EUR, GBP, JPY, CHF, CAD, AUD, NZD, CNY, INR, RUB, BRL, ZAR, SEK, NOK, DKK, 
 
 | Enum | Code | Arabic Name | English Name | Usage |
 |------|------|-------------|--------------|-------|
+| `Currency.YER` | YER  | ريال يمني   | Yemani Riyal     | `Tafkeet.convert(100, currency: Currency.YER)` |
 | `Currency.SAR` | SAR  | ريال سعودي   | Saudi Riyal     | `Tafkeet.convert(100, currency: Currency.SAR)` |
 | `Currency.EGP` | EGP  | جنيه مصري | Egyptian Pound | `Tafkeet.convert(100, currency: Currency.EGP)` |
 | `Currency.KWD` | KWD  | دينار كويتي | Kuwaiti Dinar | `Tafkeet.convert(100, currency: Currency.KWD)` |
