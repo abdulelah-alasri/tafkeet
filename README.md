@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/abdulelah-alasri/tafkeet/store/assets/tafkeet.jpg" alt="Tafkeet Logo" width="600"/>
+  <img src="https://raw.githubusercontent.com/abdulelah-alasri/tafkeet/store/assets/tafkeet.jpg" alt="Tafkeet Logo" width="100%"/>
 </div>
 
 # Tafkeet - تفقيط
