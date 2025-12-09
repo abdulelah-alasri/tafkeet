@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="https://raw.githubusercontent.com/abdulelah-alasri/tafkeet/main/assets/tafkeet.jpg" alt="Tafkeet Logo" width="600"/>
+</div>
+
 # Tafkeet - تفقيط
 
 A Flutter package for converting numbers to words in Arabic and English with currency support.

@@ -1,17 +1,7 @@
-# SQL files
-*.sql
-
-# Build files
+# Files to ignore when publishing to pub.dev
+assets/
+*.iml
 build/
-
-# IDE files
 .idea/
 .vscode/
-
-# Example files (if you don't want to publish them)
-# example/
-
-# Git files
-.git/
-.gitignore
-
+*.log
