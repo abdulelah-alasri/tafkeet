@@ -17,7 +17,7 @@ First stable release of Tafkeet - A comprehensive Flutter package for converting
 - **Number to Words Conversion**: Convert numbers to words in Arabic and English
 - **Dual Language Support**: Full support for Arabic (`Lang.ar`) and English (`Lang.en`)
 - **Large Number Support**: Handle numbers up to trillions
-- **Decimal Support**: Convert decimal numbers with proper currency part handling
+- **Decimal Support**: Convert decimal numbers with automatic rounding based on currency precision (`partPrecision`)
 - **Gender-Aware**: Correct masculine/feminine handling based on currency type
 
 #### Currency Support
@@ -99,6 +99,11 @@ Tafkeet.convert(250.50, lang: Lang.ar, currency: Currency.SAR);
 
 // Configure defaults
 Tafkeet.configure(defaultLang: Lang.ar, defaultCurrency: Currency.SAR);
+
+// Decimal rounding (automatic based on partPrecision)
+Tafkeet.convert(19002.989, lang: Lang.ar, currency: Currency.SAR);
+// 19002.989 → rounded to 19002.99 (2 decimal places)
+// Result: تسعة عشر ألف و اثنان ريال سعودي و تسعة و تسعون هللة فقط لا غير
 ```
 
 ### 🌍 Supported Languages
