@@ -1,0 +1,17 @@
+# SQL files
+*.sql
+
+# Build files
+build/
+
+# IDE files
+.idea/
+.vscode/
+
+# Example files (if you don't want to publish them)
+# example/
+
+# Git files
+.git/
+.gitignore
+
