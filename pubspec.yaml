@@ -1,9 +1,17 @@
 name: tafkeet
-description: "A Flutter package to convert numbers to words in Arabic and English with currency support."
+description: "Convert numbers to words in Arabic and English with 90+ currency support. Includes extensions for double, int, and String types."
 version: 1.0.0
 homepage: https://github.com/abdulelah-alasri/tafkeet
 repository: https://github.com/abdulelah-alasri/tafkeet
+issue_tracker: https://github.com/abdulelah-alasri/tafkeet/issues
 documentation: https://github.com/abdulelah-alasri/tafkeet#readme
+
+topics:
+  - numbers
+  - arabic
+  - localization
+  - i18n
+  - currency
 
 environment:
   sdk: ^3.0.0
