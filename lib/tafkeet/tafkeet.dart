@@ -12,7 +12,7 @@ class Tafkeet {
   static Currency? _defaultCurrency;
 
   /// Configure the package
-  /// 
+  ///
   /// [defaultLang] Default language
   /// [defaultCurrency] Default currency
   static void configure({
@@ -28,7 +28,7 @@ class Tafkeet {
   }
 
   /// Convert a number to words
-  /// 
+  ///
   /// [number] The number to convert
   /// [lang] The desired language (if not specified, uses default language)
   /// [currency] The currency (if not specified, uses default currency or no currency)
@@ -53,19 +53,21 @@ class Tafkeet {
 
     // Determine the currency
     CurrencyInfo? currencyInfo;
-    
+
     // If currency enum is specified
     if (currency != null) {
       currencyInfo = CurrencyConfig.getCurrencyFromEnum(currency);
       if (currencyInfo == null) {
-        throw ArgumentError('Currency "${currency.code}" not found in configuration');
+        throw ArgumentError(
+            'Currency "${currency.code}" not found in configuration');
       }
     }
     // If currencyCode is specified
     else if (currencyCode != null) {
       currencyInfo = CurrencyConfig.getCurrency(currencyCode);
       if (currencyInfo == null) {
-        throw ArgumentError('Currency "$currencyCode" not found in configuration');
+        throw ArgumentError(
+            'Currency "$currencyCode" not found in configuration');
       }
     }
     // Use default currency
@@ -109,4 +111,3 @@ class Tafkeet {
   /// Get the current default currency
   static Currency? get defaultCurrency => _defaultCurrency;
 }
-

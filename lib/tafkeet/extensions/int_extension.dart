@@ -9,14 +9,24 @@ extension TafkeetExtensionOnInt on int {
   ///
   /// [lang] The desired language (if not specified, uses default language)
   /// [currency] The currency (if not specified, uses default currency or no currency)
-  String tafkeet({Language? lang, Currency? currency, String? currencyCode, String? prefix, String? suffix}) {
-    return Tafkeet.convert(toDouble(), lang: lang, currency: currency,currencyCode: currency?.code,prefix: prefix,suffix: suffix);
+  String tafkeet(
+      {Language? lang,
+      Currency? currency,
+      String? currencyCode,
+      String? prefix,
+      String? suffix}) {
+    return Tafkeet.convert(toDouble(),
+        lang: lang,
+        currency: currency,
+        currencyCode: currency?.code,
+        prefix: prefix,
+        suffix: suffix);
   }
 
   /// Format number with thousand separators
-  /// 
+  ///
   /// [digit] Number of decimal places to show (default: 0)
-  /// 
+  ///
   /// Example:
   /// ```dart
   /// 1234567.amountFormat(); // Returns: '1,234,567'
@@ -25,4 +35,3 @@ extension TafkeetExtensionOnInt on int {
     return NumberUtils.amountFormat(this, digit: digit);
   }
 }
-

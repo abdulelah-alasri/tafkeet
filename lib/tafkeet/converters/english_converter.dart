@@ -173,4 +173,3 @@ class EnglishConverter {
     return retVal.trim();
   }
 }
-

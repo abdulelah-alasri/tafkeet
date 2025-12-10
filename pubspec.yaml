@@ -1,6 +1,6 @@
 name: tafkeet
 description: "Convert numbers to words in Arabic and English with 90+ currency support. Includes extensions for double, int, and String types."
-version: 1.2.1
+version: 1.2.2
 homepage: https://github.com/abdulelah-alasri/tafkeet
 repository: https://github.com/abdulelah-alasri/tafkeet
 issue_tracker: https://github.com/abdulelah-alasri/tafkeet/issues

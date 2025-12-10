@@ -205,7 +205,8 @@ void main() {
   // Example 22: Convert decimal with Arabic numerals
   print('22. Convert decimal with Arabic numerals:');
   print('   Input: ١٢٣.٤٥');
-  print('   Output: ${'١٢٣.٤٥'.tafkeet(lang: Lang.ar, currency: Currency.EGP)}');
+  print(
+      '   Output: ${'١٢٣.٤٥'.tafkeet(lang: Lang.ar, currency: Currency.EGP)}');
   print('');
 
   // Example 23: All Arabic digits conversion
@@ -254,7 +255,8 @@ void main() {
   print('30. Combine formatting and conversion:');
   final amount = 1234567.89;
   print('   Formatted: ${amount.amountFormat(digit: 2)}');
-  print('   In words: ${amount.tafkeet(lang: Lang.ar, currency: Currency.SAR)}');
+  print(
+      '   In words: ${amount.tafkeet(lang: Lang.ar, currency: Currency.SAR)}');
   print('');
 
   print('===== Examples Complete =====');

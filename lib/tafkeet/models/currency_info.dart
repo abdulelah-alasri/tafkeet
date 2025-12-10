@@ -121,7 +121,8 @@ class CurrencyInfo {
           englishPluralCurrencyPartName ?? this.englishPluralCurrencyPartName,
       arabic1CurrencyName: arabic1CurrencyName ?? this.arabic1CurrencyName,
       arabic2CurrencyName: arabic2CurrencyName ?? this.arabic2CurrencyName,
-      arabic310CurrencyName: arabic310CurrencyName ?? this.arabic310CurrencyName,
+      arabic310CurrencyName:
+          arabic310CurrencyName ?? this.arabic310CurrencyName,
       arabic1199CurrencyName:
           arabic1199CurrencyName ?? this.arabic1199CurrencyName,
       arabic1CurrencyPartName:
@@ -153,4 +154,3 @@ class CurrencyInfo {
   @override
   int get hashCode => currencyCode.hashCode;
 }
-
