@@ -24,7 +24,7 @@ Add the package to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  tafkeet: ^1.0.0
+  tafkeet: ^1.2.1
 ```
 
 Then run:
@@ -43,11 +43,12 @@ import 'package:tafkeet/tafkeet.dart';
 void main() {
   // Convert number to Arabic
   print(Tafkeet.convert(120, lang: Lang.ar));
-  // Output: مائة و عشرون فقط لا غير
+  // Output: مائة و عشرون
 
   // Convert number to English
   print(Tafkeet.convert(120, lang: Lang.en));
-  // Output: One Hundred Twenty only
+  // Output: One Hundred Twenty
+
 }
 ```
 
@@ -56,11 +57,11 @@ void main() {
 ```dart
 // Convert amount in Saudi Riyal
 print(Tafkeet.convert(250.50, lang: Lang.ar, currency: Currency.SAR));
-// Output: مئتان و خمسون ريالاً سعودياً و خمسون هللة فقط لا غير
+// Output: مئتان و خمسون ريالاً سعودياً و خمسون هللة
 
 // Convert amount in US Dollar
 print(Tafkeet.convert(100, lang: Lang.en, currency: Currency.USD));
-// Output: One Hundred US Dollars only
+// Output: One Hundred US Dollars
 ```
 
 **Note:** Decimal numbers are automatically rounded based on the currency's precision (defined by `partPrecision`). Most currencies use 2 decimal places, but some like Bitcoin can support up to 8 decimal places.
@@ -68,7 +69,7 @@ print(Tafkeet.convert(100, lang: Lang.en, currency: Currency.USD));
 ```dart
 // Example: 19002.989 will be rounded to 2 decimal places (99) for most currencies
 print(Tafkeet.convert(19002.989, lang: Lang.ar, currency: Currency.SAR));
-// Result: تسعة عشر ألف و اثنان ريال سعودي و تسعة و تسعون هللة فقط لا غير
+// Result: تسعة عشر ألف و اثنان ريال سعودي و تسعة و تسعون هللة
 ```
 
 ### Configure Default Settings
@@ -82,7 +83,7 @@ Tafkeet.configure(
 
 // Now you can use convert without specifying language and currency
 print(Tafkeet.convert(100));
-// Output: مائة ريال سعودي فقط لا غير
+// Output: مائة ريال سعودي
 ```
 
 ### Using Available Currencies
@@ -92,7 +93,7 @@ All currencies in the `Currency` enum can be used directly:
 ```dart
 // Use Egyptian Pound (already available)
 print(Tafkeet.convert(50, lang: Lang.ar, currency: Currency.EGP));
-// Output: خمسون جنيهاً مصرياً فقط لا غير
+// Output: خمسون جنيهاً مصرياً
 
 // Use Kuwaiti Dinar
 print(Tafkeet.convert(100, lang: Lang.ar, currency: Currency.KWD));
@@ -163,12 +164,19 @@ CurrencyConfig.addCurrency(
 
 // Use custom currency by code
 print(Tafkeet.convert(3, lang: Lang.ar, currencyCode: 'BTC'));
-// Output: ثلاثة بيتكوينات فقط لا غير
+// Output: ثلاثة بيتكوينات
 ```
 
 ### Using Custom Prefix and Suffix
 
+By default, prefix and suffix are empty. You can add them as needed:
+
 ```dart
+// Without prefix and suffix (default)
+print(Tafkeet.convert(500, lang: Lang.ar, currency: Currency.SAR));
+// Output: خمسمائة ريال سعودي
+
+// With custom prefix and suffix
 print(Tafkeet.convert(
   500,
   lang: Lang.ar,
@@ -176,7 +184,7 @@ print(Tafkeet.convert(
   prefix: 'المبلغ:',
   suffix: 'فقط لاغير',
 ));
-// Output: Amount: خمسمائة ريال سعودي only
+// Output: المبلغ: خمسمائة ريال سعودي فقط لاغير
 ```
 
 ## Using Extensions
@@ -188,11 +196,11 @@ The package provides useful extensions to convert numbers directly to words in a
 ```dart
 // Use extension on double
 120.5.tafkeet(lang: Lang.ar);
-// Output: مائة و عشرون و خمسون فقط لا غير
+// Output: مائة و عشرون و خمسون
 
 // With currency
 250.75.tafkeet(lang: Lang.ar, currency: Currency.SAR);
-// Output: مئتان و خمسون ريالاً سعودياً و خمسة و سبعون هللة فقط لا غير
+// Output: مئتان و خمسون ريالاً سعودياً و خمسة و سبعون هللة
 ```
 
 ### Extension on Int
@@ -200,11 +208,11 @@ The package provides useful extensions to convert numbers directly to words in a
 ```dart
 // Use extension on int
 100.tafkeet(lang: Lang.en);
-// Output: One Hundred only
+// Output: One Hundred
 
 // With currency
 500.tafkeet(lang: Lang.ar, currency: Currency.USD);
-// Output: خمسمائة دولار أمريكي فقط لا غير
+// Output: خمسمائة دولار أمريكي
 ```
 
 ### Extension on String
@@ -212,7 +220,7 @@ The package provides useful extensions to convert numbers directly to words in a
 ```dart
 // Use extension on string (if text is numeric)
 '75.25'.tafkeet(lang: Lang.ar);
-// Output: خمسة و سبعون و خمسة و عشرون فقط لا غير
+// Output: خمسة و سبعون و خمسة و عشرون
 
 // If text is not numeric, returns original text
 'Hello World'.tafkeet(lang: Lang.ar);
@@ -220,11 +228,11 @@ The package provides useful extensions to convert numbers directly to words in a
 
 // With currency
 '1000'.tafkeet(lang: Lang.en, currency: Currency.EUR);
-// Output: One Thousand Euros only
+// Output: One Thousand Euros
 
 // Supports Arabic-Indic numerals (automatically converted)
 '٥٠٠'.tafkeet(lang: Lang.ar, currency: Currency.SAR);
-// Output: خمسمائة ريال سعودي فقط لا غير
+// Output: خمسمائة ريال سعودي
 
 // Replace Arabic numerals with English numerals
 '١٢٣.٤٥'.replaceArabicNumbers();
@@ -298,7 +306,7 @@ print(amount.amountFormat(digit: 2));
 
 // Convert to words
 print(amount.tafkeet(lang: Lang.ar, currency: Currency.SAR));
-// Output: واحد مليون و مئتان و أربعة و ثلاثون ألف و خمسمائة و سبعة و ستون ريالاً سعودياً و تسعة و ثمانون هللة فقط لا غير
+// Output: واحد مليون و مئتان و أربعة و ثلاثون ألف و خمسمائة و سبعة و ستون ريالاً سعودياً و تسعة و ثمانون هللة
 ```
 
 ## Arabic-Indic Numerals Support
@@ -312,15 +320,15 @@ The `tafkeet()` extension automatically converts Arabic-Indic numerals:
 ```dart
 // Works with English numerals
 '123'.tafkeet(lang: Lang.ar);
-// Output: مائة و ثلاثة و عشرون فقط لا غير
+// Output: مائة و ثلاثة و عشرون
 
 // Works with Arabic-Indic numerals (automatically converted)
 '١٢٣'.tafkeet(lang: Lang.ar);
-// Output: مائة و ثلاثة و عشرون فقط لا غير
+// Output: مائة و ثلاثة و عشرون
 
 // Works with decimals
 '١٢٣.٤٥'.tafkeet(lang: Lang.ar, currency: Currency.SAR);
-// Output: مائة و ثلاثة و عشرون ريالاً سعودياً و خمسة و أربعون هللة فقط لا غير
+// Output: مائة و ثلاثة و عشرون ريالاً سعودياً و خمسة و أربعون هللة
 ```
 
 ### Manual Replacement
@@ -419,7 +427,7 @@ CurrencyConfig.reset();
 
 ```dart
 print(Tafkeet.convert(1234567, lang: Lang.ar, currency: Currency.SAR));
-// Output: واحد مليون و مئتان و أربعة و ثلاثون ألف و خمسمائة و سبعة و ستون ريالاً سعودياً فقط لا غير
+// Output: واحد مليون و مئتان و أربعة و ثلاثون ألف و خمسمائة و سبعة و ستون ريالاً سعودياً
 ```
 
 ### Handle Feminine Currencies
@@ -427,7 +435,7 @@ print(Tafkeet.convert(1234567, lang: Lang.ar, currency: Currency.SAR));
 ```dart
 // Syrian Pound (feminine currency)
 print(Tafkeet.convert(200, lang: Lang.ar, currency: Currency.SYP));
-// Output: مئتا ليرة سورية فقط لا غير
+// Output: مئتا ليرة سورية
 ```
 
 ### Decimal Rounding
@@ -438,10 +446,10 @@ The package automatically rounds decimal numbers based on the currency's `partPr
 // Most currencies use 2 decimal places
 print(Tafkeet.convert(19002.989, lang: Lang.ar, currency: Currency.SAR));
 // 19002.989 → rounded to 19002.99
-// Result: تسعة عشر ألف و اثنان ريال سعودي و تسعة و تسعون هللة فقط لا غير
+// Result: تسعة عشر ألف و اثنان ريال سعودي و تسعة و تسعون هللة
 
 print(Tafkeet.convert(19002.989, lang: Lang.en, currency: Currency.USD));
-// Result: Nineteen Thousand Two US Dollars and Ninety Nine Cents only
+// Result: Nineteen Thousand Two US Dollars and Ninety Nine Cents
 
 // Bitcoin supports up to 8 decimal places
 CurrencyConfig.addCurrency('BTC', CurrencyInfo(
@@ -465,11 +473,11 @@ The package currently supports two languages with the ability to extend to other
 ```dart
 // Using Arabic
 print(Tafkeet.convert(1250, lang: Lang.ar, currency: Currency.SAR));
-// Output: واحد ألف و مئتان و خمسون ريالاً سعودياً فقط لا غير
+// Output: واحد ألف و مئتان و خمسون ريالاً سعودياً
 
 // Using English
 print(Tafkeet.convert(1250, lang: Lang.en, currency: Currency.SAR));
-// Output: One Thousand Two Hundred Fifty Saudi Riyals only
+// Output: One Thousand Two Hundred Fifty Saudi Riyals
 
 // Without specifying language (uses default)
 Tafkeet.configure(defaultLang: Lang.ar, defaultCurrency: Currency.SAR);

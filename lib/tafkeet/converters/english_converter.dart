@@ -50,7 +50,7 @@ class EnglishConverter {
     double number,
     CurrencyInfo? currency, {
     String prefix = '',
-    String suffix = 'only',
+    String suffix = '',
   }) {
     if (NumberUtils.isZero(number)) {
       return _buildResult('Zero', '', currency, prefix, suffix);

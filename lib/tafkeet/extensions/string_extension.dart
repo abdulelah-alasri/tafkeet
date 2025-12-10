@@ -18,14 +18,14 @@ extension TafkeetExtensionOnString on String {
   /// '123'.tafkeet(lang: Lang.ar); // Works with English numerals
   /// '١٢٣'.tafkeet(lang: Lang.ar); // Works with Arabic numerals
   /// ```
-  String tafkeet({Language? lang, Currency? currency}) {
+  String tafkeet({Language? lang, Currency? currency, String? currencyCode, String? prefix, String? suffix}) {
     // Convert Arabic numerals to English first
     final normalizedString = NumberUtils.replaceArabicNumber(this);
     final number = double.tryParse(normalizedString);
     if (number == null) {
       return this; // Return original string if not a valid number
     }
-    return Tafkeet.convert(number, lang: lang, currency: currency);
+    return Tafkeet.convert(number, lang: lang, currency: currency,currencyCode: currencyCode,prefix: prefix,suffix: suffix);
   }
 
   /// Replace Arabic/Hindi numerals with English numerals

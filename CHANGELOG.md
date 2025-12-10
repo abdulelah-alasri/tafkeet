@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2025-12-09
+
+### 🔄 Changed
+
+- **Default Prefix and Suffix**: Changed default values for `prefix` and `suffix` parameters to empty strings (`''`) instead of `'فقط لا غير'` (Arabic) and `'only'` (English)
+  - This gives users full control over prefix and suffix text
+  - Users can now add custom prefix/suffix only when needed
+  - All examples in README updated to reflect this change
+
+### 📚 Documentation
+
+- Updated all examples in README.md to show empty default prefix/suffix
+- Added clarification that prefix and suffix are empty by default
+- Updated example outputs to remove default suffix text
+
+---
+
 ## [1.2.0] - 2025-12-09
 
 ### ✨ New Features
@@ -180,7 +197,7 @@ Tafkeet.configure(defaultLang: Lang.ar, defaultCurrency: Currency.SAR);
 // Decimal rounding (automatic based on partPrecision)
 Tafkeet.convert(19002.989, lang: Lang.ar, currency: Currency.SAR);
 // 19002.989 → rounded to 19002.99 (2 decimal places)
-// Result: تسعة عشر ألف و اثنان ريال سعودي و تسعة و تسعون هللة فقط لا غير
+// Result: تسعة عشر ألف و اثنان ريال سعودي و تسعة و تسعون هللة
 ```
 
 ### 🌍 Supported Languages

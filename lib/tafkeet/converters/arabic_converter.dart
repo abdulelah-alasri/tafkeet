@@ -103,7 +103,7 @@ class ArabicConverter {
     double number,
     CurrencyInfo? currency, {
     String prefix = '',
-    String suffix = 'فقط لا غير',
+    String suffix = '',
   }) {
     if (NumberUtils.isZero(number)) {
       return _buildResult('صفر', '', currency, prefix, suffix);
@@ -149,7 +149,7 @@ class ArabicConverter {
 
     final groups = <int>[];
     int tempNumber = number;
-    
+
     // Split number into groups of 3 digits
     while (tempNumber > 0) {
       groups.add(tempNumber % 1000);
@@ -179,12 +179,12 @@ class ArabicConverter {
         }
       }
     }
-    
+
     // Add currency name
     if (currency != null) {
       final remaining100 = number % 100;
       String currencyName;
-      
+
       if (remaining100 == 0 || remaining100 == 1) {
         currencyName = currency.arabic1CurrencyName;
       } else if (remaining100 == 2) {
@@ -198,10 +198,10 @@ class ArabicConverter {
       } else {
         currencyName = currency.arabic1199CurrencyName;
       }
-      
+
       return '$result $currencyName';
     }
-    
+
     return result;
   }
 
@@ -210,12 +210,12 @@ class ArabicConverter {
     if (number == 0) return '';
 
     final result = _processGroup(number, true, currency);
-    
+
     // Add currency part name
     if (currency != null) {
       final remaining100 = number % 100;
       String partName;
-      
+
       if (remaining100 == 0 || remaining100 == 1) {
         partName = currency.arabic1CurrencyPartName;
       } else if (remaining100 == 2) {
@@ -225,10 +225,10 @@ class ArabicConverter {
       } else {
         partName = currency.arabic1199CurrencyPartName;
       }
-      
+
       return '$result $partName';
     }
-    
+
     return result;
   }
 
@@ -257,9 +257,10 @@ class ArabicConverter {
     if (tens > 0) {
       if (tens < 20) {
         if (result.isNotEmpty) result += ' و ';
-        
+
         // Use feminine or masculine based on currency
-        final isFeminine = isLastGroup && (currency?.isCurrencyNameFeminine ?? false);
+        final isFeminine =
+            isLastGroup && (currency?.isCurrencyNameFeminine ?? false);
         result += isFeminine ? _femininOnes[tens] : _ones[tens];
       } else {
         // Process tens
@@ -268,7 +269,8 @@ class ArabicConverter {
 
         if (ones > 0) {
           if (result.isNotEmpty) result += ' و ';
-          final isFeminine = isLastGroup && (currency?.isCurrencyNameFeminine ?? false);
+          final isFeminine =
+              isLastGroup && (currency?.isCurrencyNameFeminine ?? false);
           result += isFeminine ? _femininOnes[ones] : _ones[ones];
         }
 

@@ -9,8 +9,8 @@ extension TafkeetExtensionOnInt on int {
   ///
   /// [lang] The desired language (if not specified, uses default language)
   /// [currency] The currency (if not specified, uses default currency or no currency)
-  String tafkeet({Language? lang, Currency? currency}) {
-    return Tafkeet.convert(toDouble(), lang: lang, currency: currency);
+  String tafkeet({Language? lang, Currency? currency, String? currencyCode, String? prefix, String? suffix}) {
+    return Tafkeet.convert(toDouble(), lang: lang, currency: currency,currencyCode: currency?.code,prefix: prefix,suffix: suffix);
   }
 
   /// Format number with thousand separators

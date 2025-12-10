@@ -76,9 +76,6 @@ class Tafkeet {
     // Determine prefix and suffix
     String actualPrefix = prefix ?? '';
     String actualSuffix = suffix ?? '';
-    if (actualSuffix.isEmpty) {
-      actualSuffix = selectedLang == Language.ar ? 'فقط لا غير' : 'only';
-    }
 
     // Convert based on language
     switch (selectedLang) {
