@@ -205,5 +205,95 @@ void main() {
       final result = NumberUtils.amountFormat(1234567890.12, digit: 2);
       expect(result, equals('1,234,567,890.12'));
     });
+
+    // Tests for thousands conversion fix (1000, 2000, etc.)
+    test('Convert 1000 to Arabic should be "ألف" not "واحد ألف"', () {
+      final result =
+          Tafkeet.convert(1000, lang: Lang.ar, currency: Currency.SAR);
+      expect(result, equals('ألف ريال سعودي'));
+      expect(result, isNot(contains('واحد')));
+      expect(result, startsWith('ألف'));
+    });
+
+    test('Convert 1500 to Arabic should start with "ألف"', () {
+      final result =
+          Tafkeet.convert(1500, lang: Lang.ar, currency: Currency.SAR);
+      expect(result, equals('ألف و خمسمائة ريال سعودي'));
+      expect(result, isNot(contains('واحد ألف')));
+      expect(result, startsWith('ألف'));
+    });
+
+    test('Convert 1001 to Arabic should start with "ألف"', () {
+      final result =
+          Tafkeet.convert(1001, lang: Lang.ar, currency: Currency.SAR);
+      expect(result, equals('ألف و واحد ريال سعودي'));
+      expect(result, isNot(contains('واحد ألف')));
+      expect(result, startsWith('ألف'));
+    });
+
+    test('Convert 2000 to Arabic should be "ألفا" not "اثنان ألف"', () {
+      final result =
+          Tafkeet.convert(2000, lang: Lang.ar, currency: Currency.SAR);
+      expect(result, equals('ألفا ريال سعودي'));
+      expect(result, isNot(contains('اثنان')));
+      expect(result, startsWith('ألفا'));
+    });
+
+    test('Convert 2500 to Arabic should start with "ألفا"', () {
+      final result =
+          Tafkeet.convert(2500, lang: Lang.ar, currency: Currency.SAR);
+      expect(result, equals('ألفا و خمسمائة ريال سعودي'));
+      expect(result, isNot(contains('اثنان ألف')));
+      expect(result, startsWith('ألفا'));
+    });
+
+    test('Convert 3000 to Arabic should be "ثلاثة آلاف"', () {
+      final result =
+          Tafkeet.convert(3000, lang: Lang.ar, currency: Currency.SAR);
+      expect(result, equals('ثلاثة آلاف ريال سعودي'));
+    });
+
+    test('Convert 1000000 to Arabic should be "مليون" not "واحد مليون"', () {
+      final result =
+          Tafkeet.convert(1000000, lang: Lang.ar, currency: Currency.SAR);
+      expect(result, equals('مليون ريال سعودي'));
+      expect(result, isNot(contains('واحد')));
+      expect(result, startsWith('مليون'));
+    });
+
+    test('Convert 2000000 to Arabic should be "مليونا" not "اثنان مليون"', () {
+      final result =
+          Tafkeet.convert(2000000, lang: Lang.ar, currency: Currency.SAR);
+      expect(result, equals('مليونا ريال سعودي'));
+      expect(result, isNot(contains('اثنان')));
+      expect(result, startsWith('مليونا'));
+    });
+
+    test('Convert 3000000 to Arabic should be "ثلاثة ملايين"', () {
+      final result =
+          Tafkeet.convert(3000000, lang: Lang.ar, currency: Currency.SAR);
+      expect(result, equals('ثلاثة ملايين ريال سعودي'));
+    });
+
+    test('Convert 1001000 to Arabic should be "مليون و ألف"', () {
+      final result =
+          Tafkeet.convert(1001000, lang: Lang.ar, currency: Currency.SAR);
+      expect(result, equals('مليون و ألف ريال سعودي'));
+      expect(result, isNot(contains('واحد مليون')));
+      expect(result, isNot(contains('واحد ألف')));
+    });
+
+    test('Convert 2002000 to Arabic should be "مليونا و ألفا"', () {
+      final result =
+          Tafkeet.convert(2002000, lang: Lang.ar, currency: Currency.SAR);
+      expect(result, equals('مليونا و ألفا ريال سعودي'));
+      expect(result, isNot(contains('اثنان')));
+    });
+
+    test('Convert 1234 to Arabic should work correctly', () {
+      final result =
+          Tafkeet.convert(1234, lang: Lang.ar, currency: Currency.SAR);
+      expect(result, equals('ألف و مئتان و أربعة و ثلاثون ريالاً سعودياً'));
+    });
   });
 }

@@ -5,6 +5,32 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.3] - 2025-12-17
+
+### 🐛 Bug Fixes
+
+#### Arabic Number Conversion - Thousands and Millions
+- **Fixed incorrect conversion of numbers 1000, 2000, and their derivatives**
+  - `1000` now converts to "ألف" instead of "واحد ألف" ✅
+  - `1500` now converts to "ألف وخمسمائة" instead of "واحد ألف وخمسمائة" ✅
+  - `1001` now converts to "ألف وواحد" instead of "واحد ألف وواحد" ✅
+  - `2000` now converts to "ألفان" instead of "اثنان ألف" ✅
+  - `2500` now converts to "ألفان وخمسمائة" instead of "اثنان ألف وخمسمائة" ✅
+  - `1000000` now converts to "مليون" instead of "واحد مليون" ✅
+  - `2000000` now converts to "مليونان" instead of "اثنان مليون" ✅
+
+- **Root Cause**: The converter was adding the word "واحد" (one) or "اثنان" (two) before group names (thousands, millions, etc.) which is grammatically incorrect in Arabic
+- **Solution**: Special handling for values 1 and 2 in non-last groups to use only the group name or dual form
+
+### 🧪 Testing
+
+- Added 10+ comprehensive test cases covering:
+  - Thousands: 1000, 1500, 1001, 2000, 2500, 3000
+  - Millions: 1000000, 2000000, 3000000
+  - Complex cases: 1001000, 2002000
+
+---
+
 ## [1.2.2] - 2025-12-09
 
 ### 🔄 Changed

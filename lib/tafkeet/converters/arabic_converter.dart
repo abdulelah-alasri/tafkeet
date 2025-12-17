@@ -164,15 +164,27 @@ class ArabicConverter {
         result += ' و ';
       }
 
+      // Special handling for 1 and 2 in non-last groups (thousands, millions, etc.)
+      if (i > 0) {
+        // For number 1 in thousands/millions: use only group name (ألف not واحد ألف)
+        if (groups[i] == 1) {
+          result += _arabicGroups[i];
+          continue;
+        }
+        // For number 2 in thousands/millions: use only dual form (ألفان not اثنان ألف)
+        if (groups[i] == 2) {
+          result += _arabicAppendedTwos[i];
+          continue;
+        }
+      }
+
       final groupText = _processGroup(groups[i], i == 0, currency);
       result += groupText;
 
       // Add group name (thousand, million, etc.)
       if (i > 0) {
         result += ' ';
-        if (groups[i] == 2) {
-          result += _arabicAppendedTwos[i];
-        } else if (groups[i] >= 3 && groups[i] <= 10) {
+        if (groups[i] >= 3 && groups[i] <= 10) {
           result += _arabicPluralGroups[i];
         } else {
           result += _arabicGroups[i];
